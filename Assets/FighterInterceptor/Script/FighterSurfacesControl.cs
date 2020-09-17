@@ -23,18 +23,18 @@ public class FighterSurfacesControl : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-	    if (useMouse)
-	    {
-	        MRx = Mathf.Clamp(MRx + Input.GetAxis("Mouse Y")*0.05f, -1f, 1f);
-	        MRz = Mathf.Clamp(MRz - Input.GetAxis("Mouse X")*0.05f, -1f, 1f);
-	        MRy = Mathf.Clamp(MRy + Input.GetAxis("Yaw")*0.05f, -1f, 1f);
-	    }
-	    else
-	    {
-            MRx = Mathf.Clamp(MRx + Input.GetAxis("Vertical") * 0.05f, -1f, 1f);
-            MRz = Mathf.Clamp(MRz - Input.GetAxis("Horizontal") * 0.05f, -1f, 1f);
-            MRy = Mathf.Clamp(MRy + Input.GetAxis("Yaw") * 0.05f, -1f, 1f);   
-	    }
+	    //if (useMouse)
+	    //{
+	    //    MRx = Mathf.Clamp(MRx + Input.GetAxis("Mouse Y")*0.05f, -1f, 1f);
+	    //    MRz = Mathf.Clamp(MRz - Input.GetAxis("Mouse X")*0.05f, -1f, 1f);
+	    //    MRy = Mathf.Clamp(MRy + Input.GetAxis("Yaw")*0.05f, -1f, 1f);
+	    //}
+	    //else
+	    //{
+     //       MRx = Mathf.Clamp(MRx + Input.GetAxis("Vertical") * 0.05f, -1f, 1f);
+     //       MRz = Mathf.Clamp(MRz - Input.GetAxis("Horizontal") * 0.05f, -1f, 1f);
+     //       MRy = Mathf.Clamp(MRy + Input.GetAxis("Yaw") * 0.05f, -1f, 1f);   
+	    //}
 	    if (!turnFlap)
         {
             if (Input.GetKeyDown("f")) { turnFlap = true; f = false; }
@@ -84,6 +84,6 @@ public class FighterSurfacesControl : MonoBehaviour
     }
     void OnGUI()
     {
-        GUI.DrawTexture(new Rect(Screen.width * 0.5f * (-MRz + 1f) - 8, Screen.height * 0.5f * (-MRx + 1f) - 8, 16f, 16f), tex);
+        //GUI.DrawTexture(new Rect(Screen.width * 0.5f * (-MRz + 1f) - 8, Screen.height * 0.5f * (-MRx + 1f) - 8, 16f, 16f), tex);
     }
 }

@@ -637,11 +637,11 @@
     <Reference Include="Boo.Lang">
       <HintPath>C:/Unity/Game production/2019.4.0f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Users/vantan/Desktop/sakuhinn/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Users/vantan/Desktop/sakuhinn/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>C:/Users/vantan/Desktop/sakuhinn/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>C:/Users/vantan/Desktop/sakuhinn/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>

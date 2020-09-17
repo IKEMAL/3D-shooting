@@ -10,8 +10,8 @@ public class TestPlayer : MonoBehaviour
     [SerializeField] float rotateSpeed = 0.1f; 
     /// <summary>/// 発射する場所のオブジェクト/// </summary>
     [SerializeField] Transform nozzle;
-   /// <summary>/// 弾のプレハブ/// </summary>
-    [SerializeField] GameObject canon; 
+    /// <summary>/// 弾のプレハブ/// </summary>
+    [SerializeField] GameObject canonName; 
     Rigidbody m_rb;
 
     
@@ -32,18 +32,15 @@ public class TestPlayer : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         transform.Rotate(-v * rotateSpeed, h * rotateSpeed, 0);
-        
 
+        Attack();
     }
 
     private void Attack()
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            if (canon == null)
-            {
-                canon = Instantiate(canon, nozzle.position, nozzle.rotation);
-            }
+            GameObject canon = Instantiate(canonName, nozzle.position, nozzle.rotation);
         }
     }
 }

@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AllSkyFree\AllSkyFree_Menu.cs" />
     <Compile Include="Assets\CameraController.cs" />
     <Compile Include="Assets\CanonCon.cs" />
     <Compile Include="Assets\FighterInterceptor\Script\FighterSurfacesControl.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Assets\TestPlayer.cs" />
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />
     <None Include="Assets\Photon\PhotonUnityNetworking\changelog.txt" />
+    <None Include="Assets\AllSkyFree\AllSkyFree_Readme.txt" />
     <None Include="Assets\Photon\PhotonLibs\changes-library.txt" />
     <None Include="Assets\Photon\PhotonUnityNetworking\readme.txt" />
     <None Include="Assets\Photon\PhotonLibs\Photon3Unity3D.xml" />

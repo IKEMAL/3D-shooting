@@ -343,7 +343,7 @@ GameObject:
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!81 &963194226
 AudioListener:
@@ -429,7 +429,7 @@ MonoBehaviour:
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
-    m_Style: 1
+    m_Style: 0
     m_Time: 2
     m_CustomCurve:
       serializedVersion: 2
@@ -456,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0adcc347b3254ca4e8d41762d0be1a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 8878744367031656941, guid: 4c52f754042f1f3499e08c5934fd6e88, type: 3}
+  player: {fileID: 8974717694401098897, guid: b2e18a0a6b104b947abb6c71e21a82d4, type: 3}
   offset: {x: 0, y: 2, z: -10}
 --- !u!45 &963194231
 Skybox:
@@ -466,7 +466,7 @@ Skybox:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
-  m_CustomSkybox: {fileID: 2100000, guid: 8b7dd0809c7c6498789fa32a61eaa6cb, type: 2}
+  m_CustomSkybox: {fileID: 2100000, guid: cdbb40e11399e4a17882ada20a1b896a, type: 2}
 --- !u!1 &1213878446
 GameObject:
   m_ObjectHideFlags: 0

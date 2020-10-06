@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviourPunCallbacks // Photon Realtime 用
     [SerializeField] float rotateSpeed = 0.3f;
     Rigidbody m_rb;
 
-    PhotonView m_view;
+    public PhotonView m_view;
 
     /// <summary>/// 発射する場所のオブジェクト/// </summary>
     [SerializeField] Transform nozzle;
@@ -35,15 +35,13 @@ public class PlayerController : MonoBehaviourPunCallbacks // Photon Realtime 用
 
     [SerializeField] int maxEne = 100;
     float m_Ene;
-    
+
+    [SerializeField] Transform targetPos;
     GameObject m_cannonObject;  // 砲弾のオブジェクトを参照する（連射させないため）
 
-    [SerializeField] CinemachineVirtualCamera Vcamera;
+    [SerializeField] CinemachineVirtualCamera vcam;
+    [SerializeField] GameObject can;
 
-    
-
-    float maxAngle = 90.0f;
-    float minAngle = -90.0f;
 
     // Start is called before the first frame update
     private void Start()
@@ -54,23 +52,31 @@ public class PlayerController : MonoBehaviourPunCallbacks // Photon Realtime 用
         m_rb = GetComponent<Rigidbody>();
         m_view = GetComponent<PhotonView>();
 
+        Debug.Log(m_view.IsMine);
         if (m_view.IsMine)
         {
+            can.gameObject.SetActive(true);
             m_life = maxHp;
             m_Ene = maxEne;
-            if (lifeSlider)
-            {
-                lifeSlider.value = 1;
-                RefreshLife();
-            }
 
-            if (tuboSlider)
-            {
-                tuboSlider.value = 1;
-            }
-            Vcamera.Priority = 100;
+            lifeSlider.value = 1;
+            tuboSlider.value = 1;
+
+            //lifeSlider.gameObject.SetActive(true);
+            //tuboSlider.gameObject.SetActive(true);
+
+            CinemachineVirtualCameraBase vcam = GameObject.FindObjectOfType<CinemachineVirtualCameraBase>();
+            vcam.Follow = targetPos;
+            vcam.LookAt = targetPos;
         }
-        
+        else
+        {
+            can.gameObject.SetActive(false);
+            //lifeSlider.gameObject.SetActive(false);
+            //tuboSlider.gameObject.SetActive(false);
+        }
+
+
     }
 
     private void Update()
@@ -85,12 +91,12 @@ public class PlayerController : MonoBehaviourPunCallbacks // Photon Realtime 用
             object[] parameters = new object[] { m_life };
             m_view.RPC("SyncLife", RpcTarget.Others, parameters);
         }
-
         //移動
         if (Input.GetKey(KeyCode.Space) && tuboSlider.value > 0)
         {
-            speed = 2.0f;
-            transform.position += transform.forward * speed;
+            speed = 40.0f;
+            Vector3 mov = transform.forward * speed;
+            m_rb.velocity = new Vector3(mov.x, mov.y, mov.z);
             m_Ene -= 0.4f;
             tuboSlider.value = m_Ene / maxEne;
         }
@@ -98,44 +104,37 @@ public class PlayerController : MonoBehaviourPunCallbacks // Photon Realtime 用
         {
             m_Ene += 0.2f;
             tuboSlider.value = m_Ene / maxEne;
-            speed = 0.5f;
-            transform.position += transform.forward * speed;
+            speed = 20.0f;
+            Vector3 mov = transform.forward * speed;
+            m_rb.velocity = new Vector3(mov.x, mov.y, mov.z);
         }
+
         //方向制御
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         transform.Rotate(-v * rotateSpeed, h * rotateSpeed, 0);
-        //if (transform.rotation.x >= maxAngle)
-        //{
-            
-        //}
-
-        //if (transform.rotation.x <= minAngle)
-        //{
-
-        //}
 
         Attack();
-    }
-
-    private void Attack()
-    {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            m_cannonObject = PhotonNetwork.Instantiate(canonName, nozzle.position, nozzle.rotation);
-        }
     }
 
     //private void Attack()
     //{
     //    if (Input.GetButtonDown("Fire1"))
     //    {
-    //        if (m_cannonObject == null)
-    //        {
-    //            m_cannonObject = PhotonNetwork.Instantiate(canonName, nozzle.position, nozzle.rotation);
-    //        }
+    //        m_cannonObject = PhotonNetwork.Instantiate(canonName, nozzle.position, nozzle.rotation);
     //    }
     //}
+
+    private void Attack()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            if (m_cannonObject == null)
+            {
+                m_cannonObject = PhotonNetwork.Instantiate(canonName, nozzle.position, nozzle.rotation);
+            }
+        }
+    }
 
     /// <summary>/// ダメージを与える。ダメージを与えた側が呼び出す。/// </summary>
     /// <param name="playerId">ダメージを与えたプレイヤーのID</param>
@@ -143,13 +142,17 @@ public class PlayerController : MonoBehaviourPunCallbacks // Photon Realtime 用
     public void Damage(int playerId, int damage)
     {
         m_life -= damage;
-        lifeSlider.value = (float)m_life / maxHp;
+        RefreshLife();
         // ライフが減ったら、他のクライアントとライフを同期する
         object[] parameters = new object[] { m_life };
         m_view.RPC("SyncLife", RpcTarget.Others, parameters);
 
         Debug.LogFormat("Player {0} が Player {1} の {2} に {3} のダメージを与えた", playerId, m_view.Owner.ActorNumber, name, damage);
         Debug.LogFormat("Player {0} の {1} の残りライフは {2}", m_view.Owner.ActorNumber, gameObject.name, m_life);
+        if (m_life == 0)
+        {
+            PhotonNetwork.Destroy(this.gameObject);
+        }
     }
 
     /// <summary>/// ダメージを与えたことをクライアント間で同期する /// </summary>
@@ -170,6 +173,14 @@ public class PlayerController : MonoBehaviourPunCallbacks // Photon Realtime 用
         if (lifeSlider)
         {
             lifeSlider.value = (float)m_life / maxHp;
+        }
+    }
+
+    void RefreshTubo()
+    {
+        if (tuboSlider)
+        {
+            tuboSlider.value = (float)m_Ene / maxEne;
         }
     }
 

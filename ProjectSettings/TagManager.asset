@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Nozzle
   - Vcam
+  - wall
   layers:
   - Default
   - TransparentFX

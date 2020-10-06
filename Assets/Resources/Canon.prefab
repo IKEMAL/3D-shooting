@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 6414994442090730212}
   - component: {fileID: 9030984958479990518}
   - component: {fileID: 6514868362958103705}
-  - component: {fileID: 6353450542531658148}
   - component: {fileID: 5756523381835460123}
   - component: {fileID: -3556181324985471000}
   - component: {fileID: 4426189237493747610}
+  - component: {fileID: -4655598347993925011}
   m_Layer: 0
   m_Name: Canon
   m_TagString: Untagged
@@ -113,30 +113,6 @@ MonoBehaviour:
   power: 500
   m_lifeTime: 1
   m_attackPower: 5
---- !u!114 &6353450542531658148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4169890297605278736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  observableSearch: 2
-  Synchronization: 3
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: -3556181324985471000}
-  - {fileID: 4426189237493747610}
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!54 &5756523381835460123
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -184,3 +160,27 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
+--- !u!114 &-4655598347993925011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4169890297605278736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: -3556181324985471000}
+  - {fileID: 4426189237493747610}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

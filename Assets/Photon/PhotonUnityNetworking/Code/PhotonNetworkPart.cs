@@ -788,7 +788,7 @@ namespace Photon.Pun
                 //Debug.LogWarning("Destroy " + instantiationId + " creator " + creatorId, go);
                 if (!viewZero.IsMine)
                 {
-                    Debug.LogError("Failed to 'network-remove' GameObject. Client is neither owner nor MasterClient taking over for owner who left: " + viewZero);
+                    //////Debug.LogError("Failed to 'network-remove' GameObject. Client is neither owner nor MasterClient taking over for owner who left: " + viewZero);
                     return;
                 }
             }
@@ -2244,7 +2244,7 @@ namespace Photon.Pun
                     }
                     else
                     {
-                        Debug.LogError("Ev Destroy Failed. Could not find PhotonView with instantiationId " + instantiationId + ". Sent by actorNr: " + actorNr);
+                        //Debug.LogError("Ev Destroy Failed. Could not find PhotonView with instantiationId " + instantiationId + ". Sent by actorNr: " + actorNr);
                     }
 
                     break;

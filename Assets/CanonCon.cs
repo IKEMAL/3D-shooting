@@ -46,16 +46,34 @@ public class CanonCon : MonoBehaviourPunCallbacks // Photon Realtime 用のク�
 
     private void OnCollisionEnter(Collision collision)
     {
+
         //自分が発射した弾が当たったら
-        if (!m_view.IsMine)
+        if (m_view.IsMine)
         {
             //相手がPlayerだったらダメージ
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
             if (player)
             {
                 player.Damage(PhotonNetwork.LocalPlayer.ActorNumber, m_attackPower);
-                PhotonNetwork.Destroy(gameObject);//this省略
+                PhotonNetwork.Destroy(this.gameObject);//this省略
+
+            }
+
+            if (collision.gameObject.tag == "wall")
+            {
+                PhotonNetwork.Destroy(this.gameObject);
             }
         }
+
+        
+        ////if (collision.gameObject.tag == "Player")
+        ////{
+        ////    PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+        ////    if (!player.m_view.IsMine)
+        ////    {
+        ////        player.Damage(PhotonNetwork.LocalPlayer.ActorNumber, m_attackPower);
+        ////        PhotonNetwork.Destroy(this.gameObject);//this省略
+        ////    }
+        ////}
     }
 }
